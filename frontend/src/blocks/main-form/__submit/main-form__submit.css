@@ -1,0 +1,8 @@
+.main-form__submit {
+  background-color: #fff;
+  border-radius: 2px;
+  border: none;
+  cursor: pointer;
+  padding: 14px 84px;
+  margin-bottom: 15px;
+}
