@@ -3,9 +3,9 @@ const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const helmet = require('helmet');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const centralError = require('./middlewares/centralError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-const cors = require('cors');
 
 const DB_URL = 'mongodb://127.0.0.1:27017/mestodb';
 const router = require('./routes/routers');
