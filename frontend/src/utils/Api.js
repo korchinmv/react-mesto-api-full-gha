@@ -1,16 +1,19 @@
-const TOKEN = "5fed34a4-12fb-4e00-a0af-c237a59bdc22";
-const URL = "https://mesto.nomoreparties.co/v1/cohort-61/";
+const URL = "http://api.korchin-mesto.nomoredomains.work/";
 
 class Api {
-  constructor(URL, TOKEN) {
+  constructor(URL) {
     this._URL = URL;
-    this._TOKEN = TOKEN;
   }
+
+	_getToken() {
+		const token = localStorage.getItem('jwt');
+		return token;
+	}
 
   _getHeaders() {
     return {
       "Content-Type": "application/json",
-      authorization: this._TOKEN,
+      authorization: this._getToken(),
     };
   }
 
@@ -108,5 +111,5 @@ class Api {
   }
 }
 
-const api = new Api(URL, TOKEN);
+const api = new Api(URL);
 export default api;

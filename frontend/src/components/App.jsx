@@ -63,8 +63,23 @@ const App = () => {
             navigate("/index");
           })
           .catch((err) => {
+						localStorage.removeItem('jwt');
             console.log(err);
           });
+
+				api
+					.getCards()
+					.then((resp) => {
+						setCards(resp);
+					})
+					.catch((err) => console.log(err));
+
+				api
+					.getUser()
+					.then((resp) => {
+						setCurrentUser(resp.data)
+					})
+					.catch((err) => console.log(err));	
       }
     }
   };
@@ -103,29 +118,30 @@ const App = () => {
     navigate("/sign-in");
   };
 
-  useEffect(() => {
-    api
-      .getUser()
-      .then((resp) => setCurrentUser(resp))
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   api
+  //     .getUser()
+  //     .then((resp) => {
+	// 			setCurrentUser(resp.data)
+	// 		})
+  //     .catch((err) => console.log(err));
+  // }, []);
 
-  useEffect(() => {
-    api
-      .getCards()
-      .then((resp) => {
-        setCards(resp);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+  // useEffect(() => {
+  //   api
+  //     .getCards()
+  //     .then((resp) => {
+  //       setCards(resp);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }, []);
 
   const handleUpdateUser = (data) => {
     setIsLoading(true);
-
     api
       .sendProfile(data)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -136,11 +152,10 @@ const App = () => {
 
   const handleUpdateAvatar = (avatar) => {
     setIsLoading(true);
-
     api
       .setAvatar(avatar)
       .then((res) => {
-        setCurrentUser(res);
+        setCurrentUser(res.data);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -172,8 +187,8 @@ const App = () => {
   };
 
   const handleCardLike = (card) => {
-    const isLiked = card.likes.some((i) => i._id === currentUser._id);
-
+    const isLiked = card.likes.some((id) => id === currentUser._id);
+		console.log();
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
@@ -186,11 +201,10 @@ const App = () => {
 
   const handleAddPlaceSubmit = (dataForm) => {
     setIsLoading(true);
-
     api
       .sendCard(dataForm)
       .then((newCard) => {
-        setCards([newCard, ...cards]);
+        setCards([...cards, newCard.data]);
         closeAllPopups();
       })
       .catch((err) => console.log(err))
@@ -201,7 +215,6 @@ const App = () => {
 
   const handleCardDelete = (card) => {
     setIsLoading(true);
-
     api
       .deleteCard(card._id)
       .then(() => {

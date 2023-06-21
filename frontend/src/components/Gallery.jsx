@@ -18,7 +18,7 @@ export const Gallery = ({
               onCardClick={onCardClick}
               openConfirmPopup={openConfirmPopup}
             />
-          ))}
+          )).reverse()}
         </ul>
       </div>
     </section>

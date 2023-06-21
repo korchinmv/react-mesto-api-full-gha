@@ -3,7 +3,6 @@ import { CurrentUserContext } from "../contexts/CurrentUserContext.js";
 
 export const Profile = ({ onEditAvatar, onEditProfile, onAddPlace }) => {
   const currentUser = useContext(CurrentUserContext);
-
   return (
     <section className="profile">
       <div className="container">
