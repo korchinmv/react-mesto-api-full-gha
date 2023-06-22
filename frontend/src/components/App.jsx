@@ -118,24 +118,6 @@ const App = () => {
     navigate("/sign-in");
   };
 
-  // useEffect(() => {
-  //   api
-  //     .getUser()
-  //     .then((resp) => {
-	// 			setCurrentUser(resp.data)
-	// 		})
-  //     .catch((err) => console.log(err));
-  // }, []);
-
-  // useEffect(() => {
-  //   api
-  //     .getCards()
-  //     .then((resp) => {
-  //       setCards(resp);
-  //     })
-  //     .catch((err) => console.log(err));
-  // }, []);
-
   const handleUpdateUser = (data) => {
     setIsLoading(true);
     api
@@ -188,7 +170,7 @@ const App = () => {
 
   const handleCardLike = (card) => {
     const isLiked = card.likes.some((id) => id === currentUser._id);
-		console.log();
+		console.log(isLiked);
     api
       .changeLikeCardStatus(card._id, !isLiked)
       .then((newCard) => {
