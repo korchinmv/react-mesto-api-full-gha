@@ -1,4 +1,4 @@
-export const BASE_URL = "http://api.korchin-mesto.nomoredomains.work";
+export const BASE_URL = "https://api.korchin-mesto.nomoredomains.work";
 
 const makeRequest = (url, method, body, token) => {
   const headers = { "Content-Type": "application/json" };

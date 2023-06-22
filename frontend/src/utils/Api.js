@@ -1,4 +1,4 @@
-const URL = "http://api.korchin-mesto.nomoredomains.work/";
+const URL = "https://api.korchin-mesto.nomoredomains.work/";
 
 class Api {
   constructor(URL) {

@@ -9,8 +9,8 @@
 
 ## Ссылки на проект
 
-IP-адрес x.x.x.x
+IP-адрес 84.201.139.122
 
-Frontend https://...
+Frontend https://korchin-mesto.nomoredomains.rocks
 
-Backend https://...
+Backend https://api.korchin-mesto.nomoredomains.work

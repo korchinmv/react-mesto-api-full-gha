@@ -54,7 +54,7 @@ const likeCard = async (req, res, next) => {
       req.params.cardId,
       { $addToSet: { likes: req.user._id } },
       { new: true },
-    );
+    ).populate('likes');
     if (liked === null) {
       return next(new NotFoundError(messageNotFound));
     }
