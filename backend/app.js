@@ -7,12 +7,11 @@ const { errors } = require('celebrate');
 const cors = require('cors');
 const centralError = require('./middlewares/centralError');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
-
 const router = require('./routes/routers');
 
-const { PORT, DB_URL } = process.env;
-
+const { PORT = 3000, URL_DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
 const app = express();
+
 app.use(cors());
 app.use(helmet());
 app.disable('x-powered-by');
@@ -30,7 +29,7 @@ app.use(centralError);
 
 async function startApp() {
   try {
-    mongoose.connect(DB_URL);
+    mongoose.connect(URL_DB);
     // eslint-disable-next-line no-console
     console.log('Подключились к базе данных');
     app.listen(PORT, () => {
