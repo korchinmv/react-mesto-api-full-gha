@@ -9,7 +9,7 @@
 
 ## Ссылки на проект
 
-IP-адрес 84.201.139.122
+IP 84.201.139.122
 
 Frontend https://korchin-mesto.nomoredomains.rocks
 
