@@ -22,10 +22,7 @@ const getUsers = async (req, res, next) => {
 // eslint-disable-next-line consistent-return
 const getUser = async (req, res, next) => {
   try {
-    const user = await userModel.findById(req.user._id);
-    if (!user) {
-      throw new NotFoundError(messageNotUser);
-    }
+    const user = await userModel.findById(req.user._id).orFail(NotFoundError(messageNotUser));
     res.send({ data: user });
   } catch (error) {
     if (error.name === 'CastError') {
@@ -38,10 +35,7 @@ const getUser = async (req, res, next) => {
 // eslint-disable-next-line consistent-return
 const getUserById = async (req, res, next) => {
   try {
-    const user = await userModel.findById(req.params.userId);
-    if (!user) {
-      throw new NotFoundError(messageNotUser);
-    }
+    const user = await userModel.findById(req.params.userId).orFail(NotFoundError(messageNotUser));
     res.send({ data: user });
   } catch (error) {
     if (error.name === 'CastError') {

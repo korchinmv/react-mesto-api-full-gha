@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
 const { errors } = require('celebrate');
 const cors = require('cors');
 const centralError = require('./middlewares/centralError');
@@ -10,10 +11,15 @@ const { requestLogger, errorLogger } = require('./middlewares/logger');
 const router = require('./routes/routers');
 
 const { PORT = 3000, URL_DB = 'mongodb://127.0.0.1:27017/mestodb' } = process.env;
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000,
+  max: 100,
+});
 const app = express();
 
 app.use(cors());
 app.use(helmet());
+app.use(limiter);
 app.disable('x-powered-by');
 app.use(express.json());
 app.use(requestLogger);
